@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en" data-delivery-a-date="2026-05-30">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Meal Plan · 30 May 2026</title>
+<style>
+  :root {
+    --bg: #0f1419;
+    --card: #1a1f29;
+    --card-2: #222937;
+    --border: #2a3441;
+    --text: #e6edf3;
+    --muted: #8b96a7;
+    --dim: #6b7689;
+    --accent: #00b53f;
+    --accent-soft: rgba(0, 181, 63, 0.14);
+    --good: #4fc3f7;
+    --b-color: #c084fc;
+    --b-soft: rgba(192, 132, 252, 0.14);
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.45;
+    font-size: 14px;
+  }
+  .wrap { max-width: 1320px; margin: 0 auto; padding: 20px 20px 60px; }
+  h1, h2, h3, h4 { margin: 0; font-weight: 600; }
+  .num { font-variant-numeric: tabular-nums; }
+  .right { text-align: right; }
+  .muted { color: var(--muted); }
+  .dim { color: var(--dim); }
+
+  /* HERO */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4px;
+    padding: 20px 24px;
+    margin-bottom: 18px;
+    background: linear-gradient(135deg, #00b53f 0%, #008a2f 100%);
+    border-radius: 12px;
+    color: white;
+  }
+  .hero h1 { font-size: 22px; }
+  .hero .sub { font-size: 12px; opacity: 0.9; margin-top: 2px; }
+
+  /* DELIVERY SUMMARY CARDS */
+  .deliveries {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 22px;
+  }
+  @media (max-width: 760px) { .deliveries { grid-template-columns: 1fr; } }
+  .delivery-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    border-left: 4px solid var(--accent);
+  }
+  .delivery-card.B { border-left-color: var(--b-color); }
+  .delivery-card.total { border-left-color: var(--good); }
+  .delivery-card .lbl {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  .delivery-card .when {
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 4px;
+    color: var(--text);
+  }
+  .delivery-card .amount {
+    font-size: 24px;
+    font-weight: 700;
+    margin-top: 6px;
+    font-variant-numeric: tabular-nums;
+  }
+  .delivery-card .amount small { font-size: 11px; font-weight: 500; color: var(--muted); margin-left: 4px; }
+  .delivery-card .meta { font-size: 11px; color: var(--dim); margin-top: 2px; }
+
+  /* DAY BLOCKS */
+  .section-h {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--muted);
+    font-weight: 700;
+    margin: 6px 4px 10px;
+  }
+  .day {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+  }
+  .day-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .day-head .left { display: flex; align-items: baseline; gap: 10px; }
+  .day-head h3 { font-size: 16px; font-weight: 700; }
+  .day-head .kcal-tot { font-size: 12px; color: var(--dim); font-variant-numeric: tabular-nums; }
+  .delivery-pill {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+  }
+  .delivery-pill.A { background: var(--accent-soft); color: var(--accent); }
+  .delivery-pill.B { background: var(--b-soft); color: var(--b-color); }
+
+  .meals {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+  @media (max-width: 1100px) { .meals { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .meals { grid-template-columns: 1fr; } }
+  .meal {
+    background: var(--card-2);
+    border-radius: 8px;
+    padding: 10px 12px;
+  }
+  .meal .slot {
+    font-size: 10px;
+    text-transform: uppercase;
+    color: var(--muted);
+    letter-spacing: 0.5px;
+    font-weight: 600;
+  }
+  .meal .mname { font-size: 13px; font-weight: 600; margin: 2px 0 6px; }
+  .meal ul { margin: 0; padding-left: 14px; font-size: 12px; color: var(--muted); }
+  .meal li { margin: 1px 0; }
+  .meal li .g { color: var(--dim); font-variant-numeric: tabular-nums; }
+  .meal .mkcal { font-size: 10px; color: var(--dim); margin-top: 6px; font-variant-numeric: tabular-nums; }
+
+  /* SHOPPING LIST */
+  .shop-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 8px;
+  }
+  @media (max-width: 1000px) { .shop-grid { grid-template-columns: 1fr; } }
+  .shop {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 18px;
+    border-top: 4px solid var(--accent);
+  }
+  .shop.B { border-top-color: var(--b-color); }
+  .shop .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .shop h2 { color: var(--text); font-size: 16px; font-weight: 700; }
+  .shop .when { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .shop .total { font-size: 22px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .shop .total small { font-size: 11px; font-weight: 500; color: var(--muted); margin-left: 4px; }
+  .group-h {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    color: var(--muted);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    font-weight: 700;
+    margin: 14px 0 4px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--border);
+  }
+  .group-h .gsub { font-size: 11px; color: var(--dim); font-variant-numeric: tabular-nums; }
+  .line {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 10px;
+    padding: 5px 0;
+    font-size: 13px;
+    border-bottom: 1px dotted var(--border);
+  }
+  .line .lname { color: var(--text); }
+  .line .lqty { color: var(--muted); font-variant-numeric: tabular-nums; min-width: 36px; text-align: right; }
+  .line .lprice { color: var(--text); font-variant-numeric: tabular-nums; font-weight: 600; min-width: 70px; text-align: right; }
+  .badge-sale {
+    display: inline-block;
+    background: var(--accent-soft);
+    color: var(--accent);
+    border-radius: 4px;
+    padding: 1px 6px;
+    font-size: 10px;
+    font-weight: 700;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+
+  /* SALES (deals + short-dated) */
+  .deals-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 8px;
+  }
+  @media (max-width: 1000px) { .deals-grid { grid-template-columns: 1fr; } }
+  .deals {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 18px;
+    border-top: 4px solid var(--warn, #ffb547);
+  }
+  .deals.short { border-top-color: #ff8a4c; }
+  .deals h2 {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .deals .sub { font-size: 11px; color: var(--muted); margin-bottom: 10px; }
+  .deal-row {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 10px;
+    padding: 7px 0;
+    border-bottom: 1px dotted var(--border);
+    font-size: 13px;
+    align-items: baseline;
+  }
+  .deal-row:last-child { border-bottom: none; }
+  .deal-row .dname { color: var(--text); }
+  .deal-row .dnote { color: var(--dim); font-size: 11px; }
+  .deal-row .dprice {
+    color: var(--text);
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+    text-align: right;
+    white-space: nowrap;
+  }
+  .deal-row .dprice .was {
+    color: var(--dim);
+    font-weight: 400;
+    text-decoration: line-through;
+    margin-right: 6px;
+    font-size: 11px;
+  }
+  .deal-row .dpct {
+    background: var(--accent-soft);
+    color: var(--accent);
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-size: 10px;
+    font-weight: 700;
+    min-width: 44px;
+    text-align: center;
+  }
+  .deals.short .dpct { background: rgba(255, 138, 76, 0.16); color: #ff8a4c; }
+  .deal-row .dtill { color: var(--muted); font-size: 11px; white-space: nowrap; }
+
+  /* SWAPS + NOTES */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin-top: 14px;
+  }
+  .card h2 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted); margin-bottom: 12px; }
+  .swap-row {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+    align-items: center;
+  }
+  .swap-row:last-child { border-bottom: none; }
+  .swap-row .arrow { color: var(--dim); }
+  .saved { color: var(--accent); font-weight: 700; font-variant-numeric: tabular-nums; }
+  .notes-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px 16px;
+  }
+  @media (max-width: 700px) { .notes-list { grid-template-columns: 1fr; } }
+  .note-item {
+    padding: 8px 12px;
+    background: var(--card-2);
+    border-left: 3px solid var(--good);
+    border-radius: 4px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .footer {
+    margin-top: 36px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    color: var(--dim);
+    font-size: 11px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HERO -->
+  <div class="hero">
+    <h1>Meal Plan · 30 May 2026</h1>
+    <div class="sub">no-cook · 2 deliveries</div>
+  </div>
+
+  <!-- DELIVERY SUMMARY (filled by JS) -->
+  <div class="deliveries" id="deliveries"></div>
+
+  <!-- DAYS (filled by JS) -->
+  <div class="section-h">By day · what to eat</div>
+  <div id="days"></div>
+
+  <!-- SHOPPING LISTS SIDE BY SIDE -->
+  <div class="section-h" style="margin-top: 18px;">Shopping · what to order</div>
+  <div class="shop-grid">
+    <div class="shop A">
+      <div class="head">
+        <div>
+          <h2>Delivery A</h2>
+          <div class="when" id="whenA"></div>
+        </div>
+        <div class="total" id="subA">— <small>CZK</small></div>
+      </div>
+      <div id="shoppingA"></div>
+    </div>
+    <div class="shop B">
+      <div class="head">
+        <div>
+          <h2>Delivery B</h2>
+          <div class="when" id="whenB"></div>
+        </div>
+        <div class="total" id="subB">— <small>CZK</small></div>
+      </div>
+      <div id="shoppingB"></div>
+    </div>
+  </div>
+
+  <!-- SALES — deals worth knowing about, not in this week's cart -->
+  <div class="section-h" style="margin-top: 18px;" id="salesHeader">Worth a look · current Rohlik deals</div>
+  <div class="deals-grid" id="salesGrid">
+    <div class="deals short" id="salesShortCard">
+      <h2>Short-dated</h2>
+      <div class="sub">Sale ends in the next ~3 days</div>
+      <div id="salesShort"></div>
+    </div>
+    <div class="deals" id="salesBigCard">
+      <h2>Big discounts</h2>
+      <div class="sub">≥ 25% off, healthy and on-plan</div>
+      <div id="salesBig"></div>
+    </div>
+  </div>
+
+  <!-- SWAPS -->
+  <div class="card" id="swapCard">
+    <h2>discount swaps</h2>
+    <div id="swapList"></div>
+  </div>
+
+  <!-- NOTES -->
+  <div class="card">
+    <h2>notes for the week</h2>
+    <div class="notes-list" id="notesList"></div>
+  </div>
+
+  <div class="footer">
+    2026-05-28 07:52 · guidance only, not medical advice.
+  </div>
+</div>
+
+<script>
+  const PLAN = {"week_of": "30 May 2026", "days": [{"label": "Saturday", "delivery": "A", "totals": {"kcal": 2004.2, "protein_g": 215.6, "honey_g": 0.0, "eggs_g": 0.0}, "status": "PASS", "failures": [], "meals": [{"slot": "breakfast", "name": "Skyr + frozen blueberries + oats + whey", "kcal": 672.0, "protein_g": 69.7, "eggs_g": 0.0, "items": [{"name": "Skyr Islandský plain (Milko / Pilos)", "grams": 260.0, "kcal": 169.0, "protein_g": 29.9}, {"name": "Frozen blueberries", "grams": 80.0, "kcal": 48.0, "protein_g": 0.6}, {"name": "Rolled oats", "grams": 60.0, "kcal": 228.0, "protein_g": 7.8}, {"name": "Whey isolate (user's own, 90.7% protein)", "grams": 30.0, "kcal": 111.0, "protein_g": 27.2}, {"name": "Almonds, raw or roasted unsalted", "grams": 20.0, "kcal": 116.0, "protein_g": 4.2}]}, {"slot": "lunch", "name": "Tuna salad bowl", "kcal": 445.3, "protein_g": 51.7, "eggs_g": 0.0, "items": [{"name": "Tuna chunks in water (Rio Mare / Calvo)", "grams": 150.0, "kcal": 165.0, "protein_g": 39.0}, {"name": "Cooked chickpeas, canned", "grams": 120.0, "kcal": 156.0, "protein_g": 9.6}, {"name": "Mixed salad leaves, bag", "grams": 80.0, "kcal": 13.6, "protein_g": 1.1}, {"name": "Cherry tomatoes", "grams": 120.0, "kcal": 21.6, "protein_g": 1.1}, {"name": "Cucumber", "grams": 80.0, "kcal": 12.8, "protein_g": 0.6}, {"name": "Dijon mustard", "grams": 8.0, "kcal": 5.6, "protein_g": 0.3}, {"name": "Extra-virgin olive oil", "grams": 8.0, "kcal": 70.7, "protein_g": 0.0}]}, {"slot": "snack", "name": "Cottage + cucumber sticks", "kcal": 257.0, "protein_g": 33.4, "eggs_g": 0.0, "items": [{"name": "Cottage cheese plain (Pilos / Milko)", "grams": 250.0, "kcal": 237.5, "protein_g": 32.5}, {"name": "Cucumber", "grams": 100.0, "kcal": 16.0, "protein_g": 0.7}, {"name": "Dijon mustard", "grams": 5.0, "kcal": 3.5, "protein_g": 0.2}]}, {"slot": "dinner", "name": "Chicken ham wraps", "kcal": 629.9, "protein_g": 60.8, "eggs_g": 0.0, "items": [{"name": "Wheat tortilla wraps", "grams": 100.0, "kcal": 295.0, "protein_g": 9.0}, {"name": "Chodura Fitnes kuřecí šunka 90% (sliced, ready to eat)", "grams": 150.0, "kcal": 142.5, "protein_g": 30.0}, {"name": "Edam 30% slices", "grams": 40.0, "kcal": 92.0, "protein_g": 12.0}, {"name": "Mixed salad leaves, bag", "grams": 50.0, "kcal": 8.5, "protein_g": 0.7}, {"name": "Red bell pepper", "grams": 90.0, "kcal": 27.9, "protein_g": 0.9}, {"name": "Dijon mustard", "grams": 10.0, "kcal": 7.0, "protein_g": 0.4}, {"name": "Cottage cheese plain (Pilos / Milko)", "grams": 60.0, "kcal": 57.0, "protein_g": 7.8}]}]}, {"label": "Sunday", "delivery": "A", "totals": {"kcal": 2018.1, "protein_g": 206.3, "honey_g": 0.0, "eggs_g": 0.0}, "status": "PASS", "failures": [], "meals": [{"slot": "breakfast", "name": "Cottage bowl + raspberries + walnuts + oats", "kcal": 666.5, "protein_g": 61.6, "eggs_g": 0.0, "items": [{"name": "Cottage cheese plain (Pilos / Milko)", "grams": 300.0, "kcal": 285.0, "protein_g": 39.0}, {"name": "Frozen raspberries", "grams": 80.0, "kcal": 44.0, "protein_g": 0.8}, {"name": "Walnuts", "grams": 20.0, "kcal": 130.0, "protein_g": 3.0}, {"name": "Rolled oats", "grams": 40.0, "kcal": 152.0, "protein_g": 5.2}, {"name": "Whey isolate (user's own, 90.7% protein)", "grams": 15.0, "kcal": 55.5, "protein_g": 13.6}]}, {"slot": "lunch", "name": "Shrimp & avocado rocket salad", "kcal": 444.7, "protein_g": 48.7, "eggs_g": 0.0, "items": [{"name": "Pre-cooked peeled shrimp", "grams": 200.0, "kcal": 200.0, "protein_g": 44.0}, {"name": "Avocado, ripe", "grams": 85.0, "kcal": 136.0, "protein_g": 1.7}, {"name": "Rocket / arugula, bag", "grams": 80.0, "kcal": 20.0, "protein_g": 2.1}, {"name": "Cherry tomatoes", "grams": 100.0, "kcal": 18.0, "protein_g": 0.9}, {"name": "Extra-virgin olive oil", "grams": 8.0, "kcal": 70.7, "protein_g": 0.0}]}, {"slot": "snack", "name": "Skyr + raspberries + whey", "kcal": 218.5, "protein_g": 37.2, "eggs_g": 0.0, "items": [{"name": "Skyr Islandský plain (Milko / Pilos)", "grams": 200.0, "kcal": 130.0, "protein_g": 23.0}, {"name": "Frozen raspberries", "grams": 60.0, "kcal": 33.0, "protein_g": 0.6}, {"name": "Whey isolate (user's own, 90.7% protein)", "grams": 15.0, "kcal": 55.5, "protein_g": 13.6}]}, {"slot": "dinner", "name": "Smoked salmon on rye + cottage + veg", "kcal": 688.4, "protein_g": 58.8, "eggs_g": 0.0, "items": [{"name": "Smoked salmon slices", "grams": 160.0, "kcal": 288.0, "protein_g": 35.2}, {"name": "Dark rye bread, sliced", "grams": 80.0, "kcal": 176.0, "protein_g": 5.6}, {"name": "Cottage cheese plain (Pilos / Milko)", "grams": 120.0, "kcal": 114.0, "protein_g": 15.6}, {"name": "Cucumber", "grams": 100.0, "kcal": 16.0, "protein_g": 0.7}, {"name": "Cherry tomatoes", "grams": 80.0, "kcal": 14.4, "protein_g": 0.7}, {"name": "Avocado, ripe", "grams": 50.0, "kcal": 80.0, "protein_g": 1.0}]}]}, {"label": "Monday", "delivery": "A", "totals": {"kcal": 2002.4, "protein_g": 187.5, "honey_g": 0.0, "eggs_g": 0.0}, "status": "PASS", "failures": [], "meals": [{"slot": "breakfast", "name": "Tuna-cottage open sandwich", "kcal": 395.4, "protein_g": 45.3, "eggs_g": 0.0, "items": [{"name": "Dark rye bread, sliced", "grams": 80.0, "kcal": 176.0, "protein_g": 5.6}, {"name": "Tuna chunks in water (Rio Mare / Calvo)", "grams": 100.0, "kcal": 110.0, "protein_g": 26.0}, {"name": "Cottage cheese plain (Pilos / Milko)", "grams": 100.0, "kcal": 95.0, "protein_g": 13.0}, {"name": "Cherry tomatoes", "grams": 80.0, "kcal": 14.4, "protein_g": 0.7}]}, {"slot": "lunch", "name": "Ham slices & edam wrap + salad", "kcal": 618.7, "protein_g": 56.1, "eggs_g": 0.0, "items": [{"name": "Wheat tortilla wraps", "grams": 100.0, "kcal": 295.0, "protein_g": 9.0}, {"name": "Lean turkey or chicken ham slices", "grams": 150.0, "kcal": 165.0, "protein_g": 30.0}, {"name": "Edam 30% slices", "grams": 50.0, "kcal": 115.0, "protein_g": 15.0}, {"name": "Mixed salad leaves, bag", "grams": 60.0, "kcal": 10.2, "protein_g": 0.8}, {"name": "Red bell pepper", "grams": 90.0, "kcal": 27.9, "protein_g": 0.9}, {"name": "Dijon mustard", "grams": 8.0, "kcal": 5.6, "protein_g": 0.3}]}, {"slot": "snack", "name": "Edam + almonds + whey", "kcal": 439.0, "protein_g": 52.2, "eggs_g": 0.0, "items": [{"name": "Edam 30% slices", "grams": 60.0, "kcal": 138.0, "protein_g": 18.0}, {"name": "Almonds, raw or roasted unsalted", "grams": 30.0, "kcal": 174.0, "protein_g": 6.3}, {"name": "Cucumber", "grams": 100.0, "kcal": 16.0, "protein_g": 0.7}, {"name": "Whey isolate (user's own, 90.7% protein)", "grams": 30.0, "kcal": 111.0, "protein_g": 27.2}]}, {"slot": "dinner", "name": "Tofu-sauerkraut crunch bowl", "kcal": 549.3, "protein_g": 33.9, "eggs_g": 0.0, "items": [{"name": "Tofu natural", "grams": 200.0, "kcal": 260.0, "protein_g": 28.0}, {"name": "Sauerkraut, plain", "grams": 120.0, "kcal": 22.8, "protein_g": 1.2}, {"name": "Carrot, pre-julienned bag", "grams": 100.0, "kcal": 41.0, "protein_g": 0.9}, {"name": "Red bell pepper", "grams": 80.0, "kcal": 24.8, "protein_g": 0.8}, {"name": "Walnuts", "grams": 20.0, "kcal": 130.0, "protein_g": 3.0}, {"name": "Extra-virgin olive oil", "grams": 8.0, "kcal": 70.7, "protein_g": 0.0}]}]}, {"label": "Tuesday", "delivery": "B", "totals": {"kcal": 2009.2, "protein_g": 214.9, "honey_g": 0.0, "eggs_g": 0.0}, "status": "PASS", "failures": [], "meals": [{"slot": "breakfast", "name": "Skyr + blueberries + oats + whey", "kcal": 480.0, "protein_g": 62.9, "eggs_g": 0.0, "items": [{"name": "Skyr Islandský plain (Milko / Pilos)", "grams": 260.0, "kcal": 169.0, "protein_g": 29.9}, {"name": "Frozen blueberries", "grams": 80.0, "kcal": 48.0, "protein_g": 0.6}, {"name": "Rolled oats", "grams": 40.0, "kcal": 152.0, "protein_g": 5.2}, {"name": "Whey isolate (user's own, 90.7% protein)", "grams": 30.0, "kcal": 111.0, "protein_g": 27.2}]}, {"slot": "lunch", "name": "Lentil & mozzarella bowl", "kcal": 631.9, "protein_g": 50.5, "eggs_g": 0.0, "items": [{"name": "Cooked lentils, canned", "grams": 220.0, "kcal": 253.0, "protein_g": 19.8}, {"name": "Mozzarella light", "grams": 125.0, "kcal": 250.0, "protein_g": 27.5}, {"name": "Cherry tomatoes", "grams": 120.0, "kcal": 21.6, "protein_g": 1.1}, {"name": "Cucumber", "grams": 80.0, "kcal": 12.8, "protein_g": 0.6}, {"name": "Rocket / arugula, bag", "grams": 60.0, "kcal": 15.0, "protein_g": 1.6}, {"name": "Extra-virgin olive oil", "grams": 8.0, "kcal": 70.7, "protein_g": 0.0}, {"name": "Balsamic vinegar", "grams": 10.0, "kcal": 8.8, "protein_g": 0.1}]}, {"slot": "snack", "name": "Tuna-cucumber bites + almonds", "kcal": 357.2, "protein_g": 50.7, "eggs_g": 0.0, "items": [{"name": "Tuna chunks in water (Rio Mare / Calvo)", "grams": 100.0, "kcal": 110.0, "protein_g": 26.0}, {"name": "Cucumber", "grams": 150.0, "kcal": 24.0, "protein_g": 1.1}, {"name": "Dijon mustard", "grams": 6.0, "kcal": 4.2, "protein_g": 0.2}, {"name": "Almonds, raw or roasted unsalted", "grams": 25.0, "kcal": 145.0, "protein_g": 5.2}, {"name": "Whey isolate (user's own, 90.7% protein)", "grams": 20.0, "kcal": 74.0, "protein_g": 18.1}]}, {"slot": "dinner", "name": "Chicken ham + couscous + veg", "kcal": 540.1, "protein_g": 50.8, "eggs_g": 0.0, "items": [{"name": "Chodura Fitnes kuřecí šunka 90% (sliced, ready to eat)", "grams": 200.0, "kcal": 190.0, "protein_g": 40.0}, {"name": "Instant couscous (just-add-boiled-water, kettle prep)", "grams": 130.0, "kcal": 145.6, "protein_g": 4.9}, {"name": "Broccoli florets, ready to eat", "grams": 150.0, "kcal": 51.0, "protein_g": 4.2}, {"name": "Cherry tomatoes", "grams": 80.0, "kcal": 14.4, "protein_g": 0.7}, {"name": "Extra-virgin olive oil", "grams": 12.0, "kcal": 106.1, "protein_g": 0.0}, {"name": "Light yogurt-based dressing", "grams": 30.0, "kcal": 33.0, "protein_g": 0.9}]}]}, {"label": "Wednesday", "delivery": "B", "totals": {"kcal": 2012.4, "protein_g": 195.7, "honey_g": 0.0, "eggs_g": 0.0}, "status": "PASS", "failures": [], "meals": [{"slot": "breakfast", "name": "Cottage bowl + raspberries + almonds + oats", "kcal": 652.5, "protein_g": 62.8, "eggs_g": 0.0, "items": [{"name": "Cottage cheese plain (Pilos / Milko)", "grams": 300.0, "kcal": 285.0, "protein_g": 39.0}, {"name": "Frozen raspberries", "grams": 80.0, "kcal": 44.0, "protein_g": 0.8}, {"name": "Almonds, raw or roasted unsalted", "grams": 20.0, "kcal": 116.0, "protein_g": 4.2}, {"name": "Rolled oats", "grams": 40.0, "kcal": 152.0, "protein_g": 5.2}, {"name": "Whey isolate (user's own, 90.7% protein)", "grams": 15.0, "kcal": 55.5, "protein_g": 13.6}]}, {"slot": "lunch", "name": "Smoked salmon + rye + cucumber + avocado", "kcal": 612.8, "protein_g": 48.6, "eggs_g": 0.0, "items": [{"name": "Smoked salmon slices", "grams": 140.0, "kcal": 252.0, "protein_g": 30.8}, {"name": "Dark rye bread, sliced", "grams": 80.0, "kcal": 176.0, "protein_g": 5.6}, {"name": "Cottage cheese plain (Pilos / Milko)", "grams": 80.0, "kcal": 76.0, "protein_g": 10.4}, {"name": "Cucumber", "grams": 80.0, "kcal": 12.8, "protein_g": 0.6}, {"name": "Avocado, ripe", "grams": 60.0, "kcal": 96.0, "protein_g": 1.2}]}, {"slot": "snack", "name": "Edamame + whey shake", "kcal": 218.0, "protein_g": 31.3, "eggs_g": 0.0, "items": [{"name": "Edamame, frozen, shelled", "grams": 120.0, "kcal": 144.0, "protein_g": 13.2}, {"name": "Whey isolate (user's own, 90.7% protein)", "grams": 20.0, "kcal": 74.0, "protein_g": 18.1}]}, {"slot": "dinner", "name": "Big tuna-chickpea salad", "kcal": 529.1, "protein_g": 53.0, "eggs_g": 0.0, "items": [{"name": "Tuna chunks in water (Rio Mare / Calvo)", "grams": 150.0, "kcal": 165.0, "protein_g": 39.0}, {"name": "Cooked chickpeas, canned", "grams": 130.0, "kcal": 169.0, "protein_g": 10.4}, {"name": "Mixed salad leaves, bag", "grams": 80.0, "kcal": 13.6, "protein_g": 1.1}, {"name": "Cherry tomatoes", "grams": 100.0, "kcal": 18.0, "protein_g": 0.9}, {"name": "Cucumber", "grams": 80.0, "kcal": 12.8, "protein_g": 0.6}, {"name": "Avocado, ripe", "grams": 50.0, "kcal": 80.0, "protein_g": 1.0}, {"name": "Extra-virgin olive oil", "grams": 8.0, "kcal": 70.7, "protein_g": 0.0}]}]}, {"label": "Thursday", "delivery": "B", "totals": {"kcal": 2014.9, "protein_g": 195.2, "honey_g": 0.0, "eggs_g": 0.0}, "status": "PASS", "failures": [], "meals": [{"slot": "breakfast", "name": "Salmon on rye + avocado", "kcal": 485.6, "protein_g": 35.0, "eggs_g": 0.0, "items": [{"name": "Dark rye bread, sliced", "grams": 80.0, "kcal": 176.0, "protein_g": 5.6}, {"name": "Smoked salmon slices", "grams": 80.0, "kcal": 144.0, "protein_g": 17.6}, {"name": "Cottage cheese plain (Pilos / Milko)", "grams": 80.0, "kcal": 76.0, "protein_g": 10.4}, {"name": "Cucumber", "grams": 60.0, "kcal": 9.6, "protein_g": 0.4}, {"name": "Avocado, ripe", "grams": 50.0, "kcal": 80.0, "protein_g": 1.0}]}, {"slot": "lunch", "name": "Ham & mozzarella wrap", "kcal": 753.7, "protein_g": 68.6, "eggs_g": 0.0, "items": [{"name": "Wheat tortilla wraps", "grams": 100.0, "kcal": 295.0, "protein_g": 9.0}, {"name": "Lean turkey or chicken ham slices", "grams": 150.0, "kcal": 165.0, "protein_g": 30.0}, {"name": "Mozzarella light", "grams": 125.0, "kcal": 250.0, "protein_g": 27.5}, {"name": "Mixed salad leaves, bag", "grams": 60.0, "kcal": 10.2, "protein_g": 0.8}, {"name": "Red bell pepper", "grams": 90.0, "kcal": 27.9, "protein_g": 0.9}, {"name": "Dijon mustard", "grams": 8.0, "kcal": 5.6, "protein_g": 0.3}]}, {"slot": "snack", "name": "Skyr + blueberries + whey + walnuts", "kcal": 298.5, "protein_g": 38.7, "eggs_g": 0.0, "items": [{"name": "Skyr Islandský plain (Milko / Pilos)", "grams": 200.0, "kcal": 130.0, "protein_g": 23.0}, {"name": "Frozen blueberries", "grams": 80.0, "kcal": 48.0, "protein_g": 0.6}, {"name": "Whey isolate (user's own, 90.7% protein)", "grams": 15.0, "kcal": 55.5, "protein_g": 13.6}, {"name": "Walnuts", "grams": 10.0, "kcal": 65.0, "protein_g": 1.5}]}, {"slot": "dinner", "name": "Shrimp + broccoli + couscous", "kcal": 477.1, "protein_g": 52.9, "eggs_g": 0.0, "items": [{"name": "Pre-cooked peeled shrimp", "grams": 200.0, "kcal": 200.0, "protein_g": 44.0}, {"name": "Instant couscous (just-add-boiled-water, kettle prep)", "grams": 80.0, "kcal": 89.6, "protein_g": 3.0}, {"name": "Broccoli florets, ready to eat", "grams": 150.0, "kcal": 51.0, "protein_g": 4.2}, {"name": "Carrot, pre-julienned bag", "grams": 80.0, "kcal": 32.8, "protein_g": 0.7}, {"name": "Extra-virgin olive oil", "grams": 8.0, "kcal": 70.7, "protein_g": 0.0}, {"name": "Light yogurt-based dressing", "grams": 30.0, "kcal": 33.0, "protein_g": 0.9}]}]}, {"label": "Friday", "delivery": "B", "totals": {"kcal": 1981.7, "protein_g": 195.1, "honey_g": 0.0, "eggs_g": 0.0}, "status": "PASS", "failures": [], "meals": [{"slot": "breakfast", "name": "Cottage bowl + blueberries + oats + whey", "kcal": 540.5, "protein_g": 58.4, "eggs_g": 0.0, "items": [{"name": "Cottage cheese plain (Pilos / Milko)", "grams": 300.0, "kcal": 285.0, "protein_g": 39.0}, {"name": "Frozen blueberries", "grams": 80.0, "kcal": 48.0, "protein_g": 0.6}, {"name": "Rolled oats", "grams": 40.0, "kcal": 152.0, "protein_g": 5.2}, {"name": "Whey isolate (user's own, 90.7% protein)", "grams": 15.0, "kcal": 55.5, "protein_g": 13.6}]}, {"slot": "lunch", "name": "Chicken ham + edam couscous bowl", "kcal": 524.1, "protein_g": 62.3, "eggs_g": 0.0, "items": [{"name": "Chodura Fitnes kuřecí šunka 90% (sliced, ready to eat)", "grams": 200.0, "kcal": 190.0, "protein_g": 40.0}, {"name": "Edam 30% slices", "grams": 50.0, "kcal": 115.0, "protein_g": 15.0}, {"name": "Instant couscous (just-add-boiled-water, kettle prep)", "grams": 80.0, "kcal": 89.6, "protein_g": 3.0}, {"name": "Cherry tomatoes", "grams": 100.0, "kcal": 18.0, "protein_g": 0.9}, {"name": "Broccoli florets, ready to eat", "grams": 120.0, "kcal": 40.8, "protein_g": 3.4}, {"name": "Extra-virgin olive oil", "grams": 8.0, "kcal": 70.7, "protein_g": 0.0}]}, {"slot": "snack", "name": "Tuna bites + walnuts", "kcal": 288.5, "protein_g": 30.4, "eggs_g": 0.0, "items": [{"name": "Tuna chunks in water (Rio Mare / Calvo)", "grams": 100.0, "kcal": 110.0, "protein_g": 26.0}, {"name": "Walnuts", "grams": 25.0, "kcal": 162.5, "protein_g": 3.8}, {"name": "Cucumber", "grams": 100.0, "kcal": 16.0, "protein_g": 0.7}]}, {"slot": "dinner", "name": "Tofu & sauerkraut crunch with edamame", "kcal": 628.6, "protein_g": 44.0, "eggs_g": 0.0, "items": [{"name": "Tofu natural", "grams": 200.0, "kcal": 260.0, "protein_g": 28.0}, {"name": "Sauerkraut, plain", "grams": 120.0, "kcal": 22.8, "protein_g": 1.2}, {"name": "Edamame, frozen, shelled", "grams": 100.0, "kcal": 120.0, "protein_g": 11.0}, {"name": "Carrot, pre-julienned bag", "grams": 80.0, "kcal": 32.8, "protein_g": 0.7}, {"name": "Red bell pepper", "grams": 80.0, "kcal": 24.8, "protein_g": 0.8}, {"name": "Walnuts", "grams": 15.0, "kcal": 97.5, "protein_g": 2.2}, {"name": "Extra-virgin olive oil", "grams": 8.0, "kcal": 70.7, "protein_g": 0.0}]}]}]};
+  const SHOPPING_A = [{"group": "Maso, ryby & uzeniny", "lines": [{"name": "Krevety předvařené vyloupané 31/40 (× 1)", "qty": 1, "unit_price": 229.9, "line_total": 229.9, "on_sale": false}, {"name": "Kitchin Tuňák celý v přírodním nálevu (× 4)", "qty": 4, "unit_price": 44.91, "line_total": 179.64, "on_sale": true}, {"name": "Pappudia Norský uzený losos plátky 200g (× 1)", "qty": 1, "unit_price": 152.91, "line_total": 152.91, "on_sale": true}, {"name": "Dacello Krůtí šunka nejvyšší jakosti 92 % 150g (× 1)", "qty": 1, "unit_price": 53.91, "line_total": 53.91, "on_sale": true}, {"name": "Dacello Kuřecí šunka nejvyšší jakosti 92 % (× 2)", "qty": 2, "unit_price": 26.91, "line_total": 53.82, "on_sale": true}, {"name": "Bonduelle Vapeur Cizrna (× 1)", "qty": 1, "unit_price": 49.9, "line_total": 49.9, "on_sale": true}, {"name": "Miil Eidam 30% plátky (× 2)", "qty": 2, "unit_price": 17.01, "line_total": 34.02, "on_sale": true}, {"name": "Kitchin Čočka 500g (× 1)", "qty": 1, "unit_price": 30.51, "line_total": 30.51, "on_sale": true}]}, {"group": "Mléčné & sýry", "lines": [{"name": "Miil Cottage sýr (× 5)", "qty": 5, "unit_price": 24.21, "line_total": 121.05, "on_sale": true}, {"name": "Milko Můj Skyr 0 % bílý (× 4)", "qty": 4, "unit_price": 13.9, "line_total": 55.6, "on_sale": true}]}, {"group": "Pečivo", "lines": [{"name": "Nuevo Progreso Pšeničné tortilly se špenátem 25 cm 6 ks 450g (× 1)", "qty": 1, "unit_price": 34.9, "line_total": 34.9, "on_sale": false}, {"name": "Yutto Celozrnný žitný chléb, krájený 500g (× 1)", "qty": 1, "unit_price": 26.91, "line_total": 26.91, "on_sale": true}]}, {"group": "Zelenina & ovoce", "lines": [{"name": "Rajčata cherry, vanička (× 2)", "qty": 2, "unit_price": 39.9, "line_total": 79.8, "on_sale": false}, {"name": "Rukola, vanička (× 1)", "qty": 1, "unit_price": 43.9, "line_total": 43.9, "on_sale": false}, {"name": "Mrkev praná čerstvá, balení 1kg (× 1)", "qty": 1, "unit_price": 39.9, "line_total": 39.9, "on_sale": false}, {"name": "Čerstvě utrženo – Okurka hadovka, bez folie, nestandard (× 2)", "qty": 2, "unit_price": 19.01, "line_total": 38.02, "on_sale": false}, {"name": "Samir Zelí kysané bílé, sáček 500g (× 1)", "qty": 1, "unit_price": 24.9, "line_total": 24.9, "on_sale": false}, {"name": "Salát římský 1 ks (× 1)", "qty": 1, "unit_price": 23.9, "line_total": 23.9, "on_sale": true}, {"name": "Paprika červená 1 ks (× 1)", "qty": 1, "unit_price": 19.96, "line_total": 19.96, "on_sale": true}]}, {"group": "Mražené", "lines": [{"name": "Agro Jesenice Maliny 200g (× 2)", "qty": 2, "unit_price": 63.9, "line_total": 127.8, "on_sale": false}, {"name": "Agro Jesenice Borůvky kanadské lesní 200g (× 2)", "qty": 2, "unit_price": 59.9, "line_total": 119.8, "on_sale": false}, {"name": "Alnatura BIO Edamame (× 1)", "qty": 1, "unit_price": 103.41, "line_total": 103.41, "on_sale": true}]}, {"group": "Trvanlivé & oleje", "lines": [{"name": "Kitchin Extra panenský olivový olej 750ml (× 1)", "qty": 1, "unit_price": 143.91, "line_total": 143.91, "on_sale": true}, {"name": "Franz Josef Kaiser Balzamikový ocet Modena 250ml (× 1)", "qty": 1, "unit_price": 79.9, "line_total": 79.9, "on_sale": false}, {"name": "Yutto Mandle natural 200g (× 1)", "qty": 1, "unit_price": 67.41, "line_total": 67.41, "on_sale": true}, {"name": "Yutto Vlašské ořechy jádra 200g (× 1)", "qty": 1, "unit_price": 67.41, "line_total": 67.41, "on_sale": true}, {"name": "Lunter Tofu natural (× 2)", "qty": 2, "unit_price": 28.9, "line_total": 57.8, "on_sale": false}, {"name": "Snico Hořčice francouzská 180g (× 1)", "qty": 1, "unit_price": 38.9, "line_total": 38.9, "on_sale": false}, {"name": "Kitchin Kuskus 500g (× 1)", "qty": 1, "unit_price": 30.51, "line_total": 30.51, "on_sale": true}, {"name": "Emco vločky ovesné jemné s vlákninou 500g (× 1)", "qty": 1, "unit_price": 27.9, "line_total": 27.9, "on_sale": true}, {"name": "Avokádo Hass malé ready to eat 1 ks (× 1)", "qty": 1, "unit_price": 22.9, "line_total": 22.9, "on_sale": true}]}];
+  const SHOPPING_B = [{"group": "Maso, ryby & uzeniny", "lines": [{"name": "Pappudia Norský uzený losos plátky 200g (× 2)", "qty": 2, "unit_price": 152.91, "line_total": 305.82, "on_sale": true}, {"name": "Krevety předvařené vyloupané 31/40 (× 1)", "qty": 1, "unit_price": 229.9, "line_total": 229.9, "on_sale": false}, {"name": "Dacello Kuřecí šunka nejvyšší jakosti 92 % (× 4)", "qty": 4, "unit_price": 26.91, "line_total": 107.64, "on_sale": true}, {"name": "Dacello Krůtí šunka nejvyšší jakosti 92 % 150g (× 1)", "qty": 1, "unit_price": 53.91, "line_total": 53.91, "on_sale": true}, {"name": "Miil Eidam 30% plátky (× 1)", "qty": 1, "unit_price": 17.01, "line_total": 17.01, "on_sale": true}]}, {"group": "Mléčné & sýry", "lines": [{"name": "Miil Cottage sýr (× 4)", "qty": 4, "unit_price": 24.21, "line_total": 96.84, "on_sale": true}, {"name": "Milko Můj Skyr 0 % bílý (× 4)", "qty": 4, "unit_price": 13.9, "line_total": 55.6, "on_sale": true}, {"name": "Miil Mozzarella light (× 2)", "qty": 2, "unit_price": 20.61, "line_total": 41.22, "on_sale": true}]}, {"group": "Pečivo", "lines": [{"name": "Yutto Celozrnný žitný chléb, krájený 500g (× 1)", "qty": 1, "unit_price": 26.91, "line_total": 26.91, "on_sale": true}]}, {"group": "Zelenina & ovoce", "lines": [{"name": "Rajčata cherry, vanička (× 2)", "qty": 2, "unit_price": 39.9, "line_total": 79.8, "on_sale": false}, {"name": "Agro Jesenice Brokolice růžička 350g frozen (× 2)", "qty": 2, "unit_price": 30.9, "line_total": 61.8, "on_sale": true}, {"name": "Rukola, vanička (× 1)", "qty": 1, "unit_price": 43.9, "line_total": 43.9, "on_sale": false}, {"name": "Mrkev praná čerstvá, balení 1kg (× 1)", "qty": 1, "unit_price": 39.9, "line_total": 39.9, "on_sale": false}, {"name": "Čerstvě utrženo – Okurka hadovka, bez folie, nestandard (× 2)", "qty": 2, "unit_price": 19.01, "line_total": 38.02, "on_sale": false}, {"name": "Salát římský 1 ks (× 1)", "qty": 1, "unit_price": 23.9, "line_total": 23.9, "on_sale": true}, {"name": "Paprika červená 1 ks (× 1)", "qty": 1, "unit_price": 19.96, "line_total": 19.96, "on_sale": true}]}, {"group": "Trvanlivé & oleje", "lines": [{"name": "Lunter Tofu natural (× 2)", "qty": 2, "unit_price": 28.9, "line_total": 57.8, "on_sale": false}, {"name": "Spak Bylinkový dressing s jogurtem 250ml (× 1)", "qty": 1, "unit_price": 44.9, "line_total": 44.9, "on_sale": true}, {"name": "Avokádo Hass malé ready to eat 1 ks (× 1)", "qty": 1, "unit_price": 22.9, "line_total": 22.9, "on_sale": true}]}];
+  const SUBTOTAL_A = 2181.10;
+  const SUBTOTAL_B = 1367.73;
+  const SWAPS      = [];
+  const NOTES      = [];
+  const SALES      = {"short_dated": [], "big_deals": []};
+  const DELIVERY_A_DATE = "30 May 2026";
+  const DELIVERY_B_DATE = "2 June 2026";
+
+  const fmt0 = n => Math.round(n).toLocaleString('en-US');
+  const fmt1 = n => (Math.round(n * 10) / 10).toLocaleString('en-US', {minimumFractionDigits:0, maximumFractionDigits:1});
+  const fmt2 = n => n.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
+
+  /* ------ Delivery summary cards ------ */
+  const days = PLAN.days || [];
+  const aCount = (SHOPPING_A || []).reduce((a,g) => a + g.lines.reduce((b,l)=>b+l.qty, 0), 0);
+  const bCount = (SHOPPING_B || []).reduce((a,g) => a + g.lines.reduce((b,l)=>b+l.qty, 0), 0);
+  const aDays = days.filter(d => (d.delivery||'').toUpperCase()==='A').map(d => d.label);
+  const bDays = days.filter(d => (d.delivery||'').toUpperCase()==='B').map(d => d.label);
+  const totalCart = (SUBTOTAL_A||0) + (SUBTOTAL_B||0);
+
+  function dayRange(labels) {
+    if (!labels.length) return '';
+    if (labels.length === 1) return labels[0];
+    return `${labels[0].slice(0,3)} → ${labels[labels.length-1].slice(0,3)}`;
+  }
+
+  document.getElementById('deliveries').innerHTML = `
+    <div class="delivery-card A">
+      <div class="lbl">Delivery A</div>
+      <div class="when">${DELIVERY_A_DATE || '—'}</div>
+      <div class="amount">${fmt0(SUBTOTAL_A||0)}<small>CZK</small></div>
+      <div class="meta">${aCount} items · covers ${dayRange(aDays)}</div>
+    </div>
+    <div class="delivery-card B">
+      <div class="lbl">Delivery B</div>
+      <div class="when">${DELIVERY_B_DATE || '—'}</div>
+      <div class="amount">${fmt0(SUBTOTAL_B||0)}<small>CZK</small></div>
+      <div class="meta">${bCount} items · covers ${dayRange(bDays)}</div>
+    </div>
+    <div class="delivery-card total">
+      <div class="lbl">Total this week</div>
+      <div class="when">${days.length} days · ${aCount + bCount} items</div>
+      <div class="amount">${fmt0(totalCart)}<small>CZK</small></div>
+      <div class="meta">A + B combined</div>
+    </div>
+  `;
+
+  document.getElementById('whenA').textContent = DELIVERY_A_DATE
+    ? `${DELIVERY_A_DATE} · ${dayRange(aDays)}` : dayRange(aDays);
+  document.getElementById('whenB').textContent = DELIVERY_B_DATE
+    ? `${DELIVERY_B_DATE} · ${dayRange(bDays)} · fresh top-up` : dayRange(bDays);
+
+  /* ------ Days (always-open meals) ------ */
+  const daysRoot = document.getElementById('days');
+  daysRoot.innerHTML = days.map(d => `
+    <div class="day">
+      <div class="day-head">
+        <div class="left">
+          <h3>${d.label}</h3>
+          <span class="delivery-pill ${d.delivery||'A'}">${d.delivery||'—'}</span>
+        </div>
+        <div class="kcal-tot">${fmt0(d.totals.kcal)} kcal · ${fmt1(d.totals.protein_g)} g protein</div>
+      </div>
+      <div class="meals">
+        ${d.meals.map(m => `
+          <div class="meal">
+            <div class="slot">${m.slot}</div>
+            <div class="mname">${m.name}</div>
+            <ul>
+              ${m.items.map(it => `<li>${it.name} <span class="g">· ${fmt0(it.grams)} g</span></li>`).join('')}
+            </ul>
+            <div class="mkcal">${fmt0(m.kcal)} kcal · ${fmt1(m.protein_g)} g protein</div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `).join('');
+
+  /* ------ Shopping ------ */
+  function renderShop(targetId, groups) {
+    const root = document.getElementById(targetId);
+    if (!groups || !groups.length) { root.innerHTML = '<div class="dim">No items.</div>'; return; }
+    let html = '';
+    groups.forEach(g => {
+      const gsub = g.lines.reduce((a,l)=>a+l.line_total, 0);
+      html += `<div class="group-h"><span>${g.group}</span><span class="gsub">${fmt2(gsub)} CZK</span></div>`;
+      g.lines.forEach(l => {
+        const cleanName = l.name.replace(/\s*\(× \d+\)$/, '');
+        html += `<div class="line">
+          <div class="lname">${cleanName}${l.on_sale ? '<span class="badge-sale">↓ sale</span>' : ''}</div>
+          <div class="lqty">×${l.qty}</div>
+          <div class="lprice">${fmt2(l.line_total)}</div>
+        </div>`;
+      });
+    });
+    root.innerHTML = html;
+  }
+  renderShop('shoppingA', SHOPPING_A);
+  renderShop('shoppingB', SHOPPING_B);
+  document.getElementById('subA').innerHTML = fmt0(SUBTOTAL_A) + ' <small>CZK</small>';
+  document.getElementById('subB').innerHTML = fmt0(SUBTOTAL_B) + ' <small>CZK</small>';
+
+  /* ------ Sales (deals + short-dated) ------ */
+  function fmtDateShort(s) {
+    if (!s) return '';
+    const d = new Date(s + 'T00:00:00');
+    if (isNaN(d.getTime())) return s;
+    return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+  }
+  function renderDeals(targetId, items) {
+    const root = document.getElementById(targetId);
+    if (!items || !items.length) {
+      root.innerHTML = '<div class="dim" style="font-size:12px;">Nothing right now.</div>';
+      return;
+    }
+    root.innerHTML = items.map(it => `
+      <div class="deal-row">
+        <div>
+          <div class="dname">${it.name}</div>
+          ${it.note ? `<div class="dnote">${it.note}</div>` : ''}
+        </div>
+        <div class="dpct">−${fmt0(it.discount_pct)}%</div>
+        <div class="dprice">
+          <span class="was">${fmt0(it.original_czk)}</span>${fmt0(it.sale_czk)}<span style="font-size:10px;font-weight:500;color:var(--muted);"> CZK</span>
+          <div class="dtill">till ${fmtDateShort(it.valid_till)}</div>
+        </div>
+      </div>
+    `).join('');
+  }
+  const salesShort = (SALES && SALES.short_dated) || [];
+  const salesBig   = (SALES && SALES.big_deals)   || [];
+  if (!salesShort.length && !salesBig.length) {
+    document.getElementById('salesHeader').style.display = 'none';
+    document.getElementById('salesGrid').style.display = 'none';
+  } else {
+    if (!salesShort.length) document.getElementById('salesShortCard').style.display = 'none';
+    if (!salesBig.length)   document.getElementById('salesBigCard').style.display = 'none';
+    renderDeals('salesShort', salesShort);
+    renderDeals('salesBig',   salesBig);
+  }
+
+  /* ------ Swaps ------ */
+  const swapList = document.getElementById('swapList');
+  if (!SWAPS || !SWAPS.length) {
+    document.getElementById('swapCard').style.display = 'none';
+  } else {
+    swapList.innerHTML = SWAPS.map(s => `
+      <div class="swap-row">
+        <div class="dim">${s.original}</div>
+        <div class="arrow">→</div>
+        <div>${s.replacement}</div>
+        <div class="saved">${s.saved_czk ? '−'+fmt0(s.saved_czk)+' CZK' : ''}</div>
+      </div>
+    `).join('');
+  }
+
+  /* ------ Notes ------ */
+  const notesList = document.getElementById('notesList');
+  notesList.innerHTML = (NOTES || []).map(n => `<div class="note-item">${n}</div>`).join('');
+</script>
+</body>
+</html>
